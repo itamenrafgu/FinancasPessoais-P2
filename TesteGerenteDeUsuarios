@@ -1,0 +1,79 @@
+package Pacote;
+
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+
+public class TesteGerenteDeUsuarios {
+	private String Email, Senha;
+	private Usuario user1, user2, user3, user4, user5;
+	private GerenteDeUsuarios gdr;
+
+	@Before
+	public void CriaUsuarios() throws Exception {
+		gdr = new GerenteDeUsuarios();
+		user1 = new Usuario("tony123@gmail.com", "Antonio", "senha1");
+		user2 = new Usuario("bobs@gmail.com", "Bob", "senha2");
+		user3 = new Usuario("mctreta@gmail.com", "Treta", "senha3");
+		user4 = new Usuario("tony123@gmail.com", "Antonio", "senha1");
+	}
+
+	@Test
+	public void testeAdicionaUsuarios() throws Exception {
+		try {
+			gdr.adicionaUsuario(user1);
+			gdr.adicionaUsuario(user2);
+			gdr.adicionaUsuario(user3);
+		} catch (Exception e) {
+			Assert.fail("Nao era pra lancar excecao");
+		}
+	}
+	
+	@Test
+	public void testeAdicionaUsuarioExistente() throws Exception {
+		try {
+			gdr.adicionaUsuario(user1);
+			gdr.adicionaUsuario(user4);
+			Assert.fail();
+		}catch (Exception e) {
+			Assert.assertEquals("mensagem de erro errada", "Usuario ja existe.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testePesquisaUsuario() throws Exception {
+		gdr.adicionaUsuario(user1);
+		Assert.assertEquals("Antonio", gdr.pesquisaUsuario(user1.getEmail()));
+		
+		gdr.adicionaUsuario(user2);
+		Assert.assertEquals("Bob", gdr.pesquisaUsuario(user2.getEmail()));
+		
+		gdr.adicionaUsuario(user3);
+		Assert.assertEquals("Treta", gdr.pesquisaUsuario(user3.getEmail()));	
+	}
+	
+	@Test
+	public void testeRealizaLogin() throws Exception {
+		gdr.adicionaUsuario(user1);
+		gdr.adicionaUsuario(user2);
+		
+		Assert.assertTrue(gdr.realizaLogin("tony123@gmail.com", "senha1"));
+		Assert.assertTrue(gdr.realizaLogin("bobs@gmail.com", "senha2"));
+	}
+	
+	@Test
+	public void testeUsuarioInexistente() throws Exception {
+		Assert.assertFalse(gdr.realizaLogin("tony123@gmail.com", "senha1"));
+		Assert.assertFalse(gdr.realizaLogin("bobs@gmail.com", "senha2"));
+	}
+	
+	@Test
+	public void testeSenhaIncorreta() throws Exception {
+		gdr.adicionaUsuario(user1);
+		Assert.assertFalse(gdr.realizaLogin("tony123@gmail.com", "senha5"));
+
+		gdr.adicionaUsuario(user2);
+		Assert.assertFalse(gdr.realizaLogin("bobs@gmail.com", "senha3"));
+		
+	}
+}
