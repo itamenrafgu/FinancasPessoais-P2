@@ -1,0 +1,46 @@
+package Pacote;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import projetop2.utils.*;
+
+/**
+ * Classe que representa o gerenciamento de Usuario.
+ *  @author Mendelssohn Dantas de Sa - 113210581
+ *  		Italo Raphael Almeida Costa - 113210419
+ *  @version 0.1 / 11 de julho de 2014
+ */
+public class GerenteDeUsuarios<T> {
+	private List<Usuario> contas;
+		
+	public GerenteDeUsuarios() {
+		contas = new ArrayList<Usuario>();
+	}
+	
+	public void adicionaUsuario(Usuario conta) throws Exception {
+		for (int i = 0; i < contas.size(); i++) {
+			if (contas.get(i).getEmail().equals(conta.getEmail())) 
+				throw new Exception("Usuario ja existe.");
+		}
+		contas.add(conta);
+	}
+	
+	public String pesquisaUsuario(String Email) {
+		for (int i = 0; i < contas.size(); i++) {
+			if (contas.get(i).getEmail().equals(Email)) {
+				return contas.get(i).getNome();
+			}
+		}
+		return null;
+	}
+	
+	public boolean realizaLogin(String Email, String Senha) throws Exception {
+		for (int i = 0; i < contas.size(); i++) {
+			if (contas.get(i).getEmail().equals(Email))
+				if(contas.get(i).getSenha().equals(Senha))
+					return true;
+		}				
+		return false;
+	}
+}
