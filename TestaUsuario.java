@@ -11,7 +11,10 @@ public class TestaUsuario {
 	public void testaUsuarioValido() {
 		try {
 			user1 = new Usuario("tony123@gmail.com", "Antonio", "senha1");
-			
+			Assert.assertEquals(user1.getEmail(), "tony123@gmail.com");
+			Assert.assertEquals(user1.getNome(), "Antonio");
+			Assert.assertEquals(user1.getSenha(), "senha1");
+
 		} catch (Exception e) {
 			Assert.fail("Nao deveria dar Excessao");
 		}
@@ -39,7 +42,7 @@ public class TestaUsuario {
 	}
 
 	@Test
-	public void testaEmail() {
+	public void testaEmailInvalido() {
 		try {
 			user1 = new Usuario("gugubeto__hotmail.com", "Gugu", "senha4");
 			Assert.fail();
@@ -60,7 +63,7 @@ public class TestaUsuario {
 	}
 
 	@Test
-	public void testaSenha() {
+	public void testaSenhaInvalida() {
 		try {
 			user1 = new Usuario("mendel_sa@hotmail.com", "Mendel", "senha");
 			Assert.fail();
