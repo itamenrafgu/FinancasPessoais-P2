@@ -1,5 +1,6 @@
 package Pacote;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.*; 
@@ -31,7 +32,7 @@ public class Usuario implements Serializable {
 	}
 
 	public String setNome(String nome) throws Exception {
-		if (nome == "" | nome == null)
+		if (nome.equals("") | nome == null)
 			throw new Exception("Nome invalido.");
 		return this.nome = nome;
 	}
@@ -44,7 +45,7 @@ public class Usuario implements Serializable {
 		return this.senha = senha;
 	}
 
-	public boolean validaEmail(String email) {
+	private boolean validaEmail(String email) {
 		Pattern p = Pattern.compile("^[\\w-]+(\\.[\\w-]+)*@([\\w-]+\\.)+[a-zA-Z]{2,7}$");
 		Matcher m = p.matcher(email);
 		if (m.find()) {
@@ -62,4 +63,13 @@ public class Usuario implements Serializable {
 	public String toString() {
 		return "Usuario: " + getNome() + "\nSeu e-mail: " + getEmail();
 	}
+	
+	@Override
+	public boolean equals(Object obj){
+        if (!(obj instanceof Usuario)){
+              return false;
+       }
+       Usuario outroUsuario = (Usuario) obj;
+       return getEmail().equals(outroUsuario.getEmail());
+	}       
 }
