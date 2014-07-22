@@ -2,30 +2,53 @@ package Pacote;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import projetop2.utils.*;
 
 /**
  * Classe que representa o gerenciamento de Usuario.
  *  @author Mendelssohn Dantas de Sa - 113210581
- *  		Italo Raphael Almeida Costa - 113210419
- *  @version 0.1 / 11 de julho de 2014
+ * 	    Italo Raphael Almeida Costa - 113210419
+ *          Italo Simoes Limeira - 113210114
+ *	    Gustavo Adolfo Di Pace Tejo Filho - 113210105
+ *  @version 0.1 / 22 de julho de 2014
  */
-public class GerenteDeUsuarios<T> {
+public class GerenteDeUsuarios {
 	private List<Usuario> contas;
+	private ArquivoDeDados<List<Usuario>> Dados;
 		
+	/**
+	 * Contrutor da classe Gerente de Usuario
+	 */
 	public GerenteDeUsuarios() {
 		contas = new ArrayList<Usuario>();
+		Dados = new ArquivoDeDados<List<Usuario>>("Dados.txt");
 	}
 	
+	/**
+	 * Metodo que adiciona a conta do usuario.
+	 * 
+	 * @param conta
+	 * 			a conta do usuario.
+	 * @throws Exception
+	 * 			lanca excecao caso o usuario ja existir.
+	 */
 	public void adicionaUsuario(Usuario conta) throws Exception {
 		for (int i = 0; i < contas.size(); i++) {
 			if (contas.get(i).getEmail().equals(conta.getEmail())) 
 				throw new Exception("Usuario ja existe.");
 		}
 		contas.add(conta);
+		Dados.salvaObjeto(contas);
 	}
 	
+	/**
+	 * Metodo que pesquisa usuario.
+	 * 
+	 * @param Email
+	 * 			o email que deseja pesquisar.
+	 * @return
+	 * 			o nome do usuario caso existir, ou null caso contrario.
+	 */
 	public String pesquisaUsuario(String Email) {
 		for (int i = 0; i < contas.size(); i++) {
 			if (contas.get(i).getEmail().equals(Email)) {
@@ -35,7 +58,21 @@ public class GerenteDeUsuarios<T> {
 		return null;
 	}
 	
-	public boolean realizaLogin(String Email, String Senha) throws Exception {
+	public int numeroDeUsuarios() {
+		return contas.size();
+	}
+	
+	/**
+	 * Metodo que realiza o login do usuario.
+	 * 
+	 * @param Email
+	 * 			email do usuario ja cadastrado.
+	 * @param Senha
+	 * 			senha do usuario ja cadastado.
+	 * @return
+	 * 			true caso o login seja realizado ou false caso contrario.
+	 */
+	public boolean realizaLogin(String Email, String Senha) {
 		for (int i = 0; i < contas.size(); i++) {
 			if (contas.get(i).getEmail().equals(Email))
 				if(contas.get(i).getSenha().equals(Senha))
