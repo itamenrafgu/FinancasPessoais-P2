@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.*; 
 
-public class Usuario {
+public class Usuario implements Serializable {
 	private String email, nome, senha;
 
 	public Usuario(String email, String nome, String senha) throws Exception {
