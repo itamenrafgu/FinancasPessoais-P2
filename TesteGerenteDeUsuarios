@@ -5,25 +5,24 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class TesteGerenteDeUsuarios {
-	private String Email, Senha;
-	private Usuario user1, user2, user3, user4, user5;
-	private GerenteDeUsuarios gdr;
+	private Usuario user1, user2, user3;
+	private GerenteDeUsuarios gdu;
 
 	@Before
 	public void CriaUsuarios() throws Exception {
-		gdr = new GerenteDeUsuarios();
+		gdu = new GerenteDeUsuarios();
 		user1 = new Usuario("tony123@gmail.com", "Antonio", "senha1");
 		user2 = new Usuario("bobs@gmail.com", "Bob", "senha2");
 		user3 = new Usuario("mctreta@gmail.com", "Treta", "senha3");
-		user4 = new Usuario("tony123@gmail.com", "Antonio", "senha1");
 	}
 
 	@Test
 	public void testeAdicionaUsuarios() throws Exception {
 		try {
-			gdr.adicionaUsuario(user1);
-			gdr.adicionaUsuario(user2);
-			gdr.adicionaUsuario(user3);
+			gdu.adicionaUsuario(user1);
+			gdu.adicionaUsuario(user2);
+			gdu.adicionaUsuario(user3);
+			Assert.assertEquals(gdu.numeroDeUsuarios(), 3);
 		} catch (Exception e) {
 			Assert.fail("Nao era pra lancar excecao");
 		}
@@ -32,8 +31,8 @@ public class TesteGerenteDeUsuarios {
 	@Test
 	public void testeAdicionaUsuarioExistente() throws Exception {
 		try {
-			gdr.adicionaUsuario(user1);
-			gdr.adicionaUsuario(user4);
+			gdu.adicionaUsuario(user1);
+			gdu.adicionaUsuario(user1);
 			Assert.fail();
 		}catch (Exception e) {
 			Assert.assertEquals("mensagem de erro errada", "Usuario ja existe.", e.getMessage());
@@ -41,39 +40,39 @@ public class TesteGerenteDeUsuarios {
 	}
 	
 	@Test
-	public void testePesquisaUsuario() throws Exception {
-		gdr.adicionaUsuario(user1);
-		Assert.assertEquals("Antonio", gdr.pesquisaUsuario(user1.getEmail()));
+	public void testePesquisaUsuarioValido() throws Exception {
+		gdu.adicionaUsuario(user1);
+		Assert.assertEquals("Antonio", gdu.pesquisaUsuario(user1.getEmail()));
 		
-		gdr.adicionaUsuario(user2);
-		Assert.assertEquals("Bob", gdr.pesquisaUsuario(user2.getEmail()));
+		gdu.adicionaUsuario(user2);
+		Assert.assertEquals("Bob", gdu.pesquisaUsuario(user2.getEmail()));
 		
-		gdr.adicionaUsuario(user3);
-		Assert.assertEquals("Treta", gdr.pesquisaUsuario(user3.getEmail()));	
+		gdu.adicionaUsuario(user3);
+		Assert.assertEquals("Treta", gdu.pesquisaUsuario(user3.getEmail()));	
 	}
 	
 	@Test
-	public void testeRealizaLogin() throws Exception {
-		gdr.adicionaUsuario(user1);
-		gdr.adicionaUsuario(user2);
+	public void testeRealizaLoginValido() throws Exception {
+		gdu.adicionaUsuario(user1);
+		gdu.adicionaUsuario(user2);
 		
-		Assert.assertTrue(gdr.realizaLogin("tony123@gmail.com", "senha1"));
-		Assert.assertTrue(gdr.realizaLogin("bobs@gmail.com", "senha2"));
+		Assert.assertTrue(gdu.realizaLogin("tony123@gmail.com", "senha1"));
+		Assert.assertTrue(gdu.realizaLogin("bobs@gmail.com", "senha2"));
 	}
 	
 	@Test
 	public void testeUsuarioInexistente() throws Exception {
-		Assert.assertFalse(gdr.realizaLogin("tony123@gmail.com", "senha1"));
-		Assert.assertFalse(gdr.realizaLogin("bobs@gmail.com", "senha2"));
+		Assert.assertFalse(gdu.realizaLogin("tony123@gmail.com", "senha1"));
+		Assert.assertFalse(gdu.realizaLogin("bobs@gmail.com", "senha2"));
 	}
 	
 	@Test
 	public void testeSenhaIncorreta() throws Exception {
-		gdr.adicionaUsuario(user1);
-		Assert.assertFalse(gdr.realizaLogin("tony123@gmail.com", "senha5"));
+		gdu.adicionaUsuario(user1);
+		Assert.assertFalse(gdu.realizaLogin("tony123@gmail.com", "senha5"));
 
-		gdr.adicionaUsuario(user2);
-		Assert.assertFalse(gdr.realizaLogin("bobs@gmail.com", "senha3"));
+		gdu.adicionaUsuario(user2);
+		Assert.assertFalse(gdu.realizaLogin("bobs@gmail.com", "senha3"));
 		
 	}
 }
