@@ -1,0 +1,19 @@
+package Pacote;
+
+public class Categoria {
+	private String nomeCategoria;
+	private int cor;
+	
+	public Categoria(String nomeCategoria, int cor) {
+		this.nomeCategoria = nomeCategoria;
+		this.cor = cor;
+	}
+	
+	public String getCategoria() {
+		return nomeCategoria;
+	}
+	
+	public int getCor() {
+		return cor;
+	}
+}
