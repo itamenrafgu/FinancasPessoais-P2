@@ -1,0 +1,8 @@
+package Pacote;
+
+public class Provento extends Transacao {
+	public Provento(double valor, Categoria c, Recorrencia r) {
+		super(valor, c, r);
+	}
+
+}
