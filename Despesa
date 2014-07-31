@@ -1,0 +1,8 @@
+package Pacote;
+
+public class Despesa extends Transacao {
+	public Despesa(double valor, Categoria c, Recorrencia r) {
+		super(valor, c, r);
+	}
+
+}
