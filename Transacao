@@ -1,0 +1,14 @@
+package Pacote;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Transacao {
+	private double valor;
+	private List<Categoria> categoria;
+
+	public Transacao(double valor, Categoria c, Recorrencia r) {
+		this.valor = valor;	
+		categoria = new ArrayList<Categoria>();
+	}
+}
