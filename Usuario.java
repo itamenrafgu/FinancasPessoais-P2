@@ -1,6 +1,8 @@
 package Pacote;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.*; 
 
 /**
@@ -14,6 +16,7 @@ import java.util.regex.*;
 
 public class Usuario implements Serializable {
 	private String email, nome, senha, dicaSenha;
+	private List<Transacao> transacoes;
 
 	/**
 	 * Contrutor da classe Usuario
@@ -32,6 +35,7 @@ public class Usuario implements Serializable {
 		setEmail(email);
 		setNome(nome);
 		setSenha(senha);
+		transacoes = new ArrayList<Transacao>();
 	}
 	
 	/**
