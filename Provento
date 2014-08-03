@@ -1,8 +1,11 @@
 package Pacote;
 
 public class Provento extends Transacao {
-	public Provento(double valor, Categoria c, Recorrencia r) {
-		super(valor, c, r);
+	public Provento(String descricao, String dataDeInsercao, double valor, Categoria c, Recorrencia r) {
+		super(descricao, dataDeInsercao, valor, c, r);
 	}
-
+	
+	public void Provento(double valorDoProvento) {
+		valor += valorDoProvento;
+	}
 }
