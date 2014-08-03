@@ -4,11 +4,35 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Transacao {
-	private double valor;
+	protected double valor;
+	private String descricao;
+	private String dataDeInsercao;
 	private List<Categoria> categoria;
 
-	public Transacao(double valor, Categoria c, Recorrencia r) {
-		this.valor = valor;	
+	public Transacao(String descricao, String dataDeInsercao, double valor, Categoria c, Recorrencia r) {
+		this.valor = valor;
+		this.descricao = descricao;
+		this.dataDeInsercao = dataDeInsercao;
 		categoria = new ArrayList<Categoria>();
+	}
+	
+	public double getValor() {
+		return valor;
+	}
+	
+	public String getDescricao() {
+		return descricao;
+	}
+	
+	public String getDataDeInsercao() {
+		return dataDeInsercao;
+	}
+	
+	public void adicionarCategoria(Categoria c) {
+		categoria.add(c);
+	}
+	
+	public void removeCategoria(Categoria c) {
+		categoria.remove(c);
 	}
 }
