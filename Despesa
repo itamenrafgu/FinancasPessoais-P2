@@ -1,8 +1,11 @@
 package Pacote;
 
-public class Despesa extends Transacao {
-	public Despesa(double valor, Categoria c, Recorrencia r) {
-		super(valor, c, r);
+public class Provento extends Transacao {
+	public Provento(String descricao, String dataDeInsercao, double valor, Categoria c, Recorrencia r) {
+		super(descricao, dataDeInsercao, valor, c, r);
 	}
-
+	
+	public void Provento(double valorDoProvento) {
+		valor += valorDoProvento;
+	}
 }
