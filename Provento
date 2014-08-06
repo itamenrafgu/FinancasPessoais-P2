@@ -6,6 +6,6 @@ public class Provento extends Transacao {
 	}
 	
 	public void Provento(double valorDoProvento) {
-		valor += valorDoProvento;
+		valor += valor;
 	}
 }
