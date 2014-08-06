@@ -6,6 +6,6 @@ public class Despesa extends Transacao {
 	}
 	
 	public void Despesa(double valorDaDespesa) {
-		valor -= valorDaDespesa;		
+		valor += valorDaDespesa;		
 	}
 }
